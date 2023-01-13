@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"-->
+    <link rel="stylesheet" href="w3.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="data/data.js"></script>
+    <!-- Libraries go here -->
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.umd.js"></script>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body class="w3-light-grey">
+    <header class="w3-container w3-white w3-xlarge w3-padding-16">
+        <span id="page-title" class="w3-left w3-padding">Some data visualisations</span>
+    </header>
+    <div class="w3-container">
+        <p>A simple page to show some data visualisations and use a shared github repository for adding new ones.</p>
+    </div>
+
+    <div class="w3-container">
+        <!-- HTML elements - rows with 3 columns within div.w3-container > div.w3-row -->
+<div class="w3-row">
+  <div class="w3-col m6 l4 ">
+    <div class="w3-container w3-margin w3-center w3-card-4">
+        <div class="w3-margin-top">
+        <div id="{plot-id}" class='plot123'></div>
+
+        </div>
+        <div class="w3-container w3-center">
+        <p>Plotly barplot</p>
+
+        </div>
+        <script>
+    var plotIt = function () {
+        let uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+        document.getElementById('{plot-id}').id = uniqid;
+
+        let data = [
+            {
+                x: categoryData.groups,
+                y: categoryData.counts,
+                type: 'bar'
+            }
+        ];
+
+        let layout = {
+            margin: { t: 30, r: 0, b: 30, l: 30 }
+        };
+
+        let config = { responsive: true };
+
+        Plotly.newPlot(uniqid, data, layout, config);
+    };
+
+    plotIt();
+</script>
+
+    </div>
+</div>
+<div class="w3-col m6 l4 ">
+    <div class="w3-container w3-margin w3-center w3-card-4">
+        <div class="w3-margin-top">
+        <div id="{plot-id}" class='plot123'></div>
+
+        </div>
+        <div class="w3-container w3-center">
+        <p>Plotly horizontal barplot</p>
+
+        </div>
+        <script>
+    function plotIt() {
+        let uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+        document.getElementById('{plot-id}').id = uniqid;
+
+        let data = [
+            {
+                y: categoryData.groups,
+                x: categoryData.counts,
+                type: 'bar',
+                orientation: 'h',
+            }
+        ];
+
+        let layout = {
+            margin: { t: 30, r: 0, b: 30, l: 70 }
+        };
+
+        let config = { responsive: true };
+
+        Plotly.newPlot(uniqid, data, layout, config);
+    };
+    plotIt();
+</script>
+
+    </div>
+</div>
+<div class="w3-col m6 l4 ">
+    <div class="w3-container w3-margin w3-center w3-card-4">
+        <div class="w3-margin-top">
+        <div class='plot123'>
+    <canvas id="{plot-id}"></canvas>
+</div>
+
+        </div>
+        <div class="w3-container w3-center">
+        <p>chartjs scatterplot</p>
+
+        </div>
+        <script>
+    function plotIt() {
+        /* Leave these two lines - matches first {plot-id} (above) to make id unique */
+        var uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+        document.getElementById('{plot-id}').id = uniqid;
+
+        let scatterDataXY = scatterData.x.map((d, i) => { return { x: scatterData.x[i], y: scatterData.y[i] } });
+
+        /* Add plot code below */
+        let data = {
+            datasets: [{
+                label: 'Scatter Dataset',
+                data: scatterDataXY,
+                backgroundColor: 'rgb(255, 99, 132)'
+            }]
+        };
+
+        let config = {
+            type: 'scatter',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom'
+                    }
+                },
+                maintainAspectRatio: false,
+                resizeDelay: 250
+            }
+        };
+
+        new Chart(document.getElementById(uniqid), config);
+    };
+    plotIt();
+</script>
+
+    </div>
+</div>
+<div class="w3-col m6 l4 ">
+    <div class="w3-container w3-margin w3-center w3-card-4">
+        <div class="w3-margin-top">
+        <div id="{plot-id}" class='plot123'></div>
+
+        </div>
+        <div class="w3-container w3-center">
+        <p>Google charts pie chart</p>
+
+        </div>
+        <script>
+    /* Leave these two lines - matches first {plot-id} (above) to make id unique */
+    var uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+    document.getElementById('{plot-id}').id = uniqid;
+
+    function plotIt() {
+
+        /* Add plot code below */
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows(pizzaData.map(d => [d.ingredient, d.n]));
+
+            // Set chart options
+            var options = {
+                'title': 'What was my pizzas'
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById(uniqid));
+            chart.draw(data, options);
+
+        }
+        // Silly google resize code
+        let google_shite = "done";
+
+        function resizer() {
+            if (google_shite == "done") {
+                google_shite = "waiting";
+                setTimeout(function () {
+                    drawChart();
+                    google_shite = "done";
+                }, 1000);
+            }
+            document.querySelectorAll('div[style="position: absolute; display: none;"]').forEach(e => e.remove())
+        };
+
+        window.addEventListener('resize', resizer, false);
+    }
+
+    plotIt();
+</script>
+
+    </div>
+</div>
+</div>
+
+       
+
+</body>
+
+</html>

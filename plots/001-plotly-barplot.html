@@ -1,0 +1,46 @@
+<!-- 
+    Plot template
+    
+    Use this to draft your plot. Use data.js. Add required libraries in the script
+    tag
+
+-->
+<!-- SOURCE DATA - leave unchanged -->
+<script src="../data.js"></script>
+
+<!-- PLOT -->
+
+<!-- required libray -->
+<script src="https://cdn.plot.ly/plotly-2.16.1.min.js"></script>
+
+<!-- plot title -->
+<p>Plotly barplot</p>
+
+<!-- plot div -->
+<div id="{plot-id}" class='plot123'></div>
+
+<!-- plot script -->
+<script>
+    var plotIt = function () {
+        let uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+        document.getElementById('{plot-id}').id = uniqid;
+
+        let data = [
+            {
+                x: categoryData.groups,
+                y: categoryData.counts,
+                type: 'bar'
+            }
+        ];
+
+        let layout = {
+            margin: { t: 30, r: 0, b: 30, l: 30 }
+        };
+
+        let config = { responsive: true };
+
+        Plotly.newPlot(uniqid, data, layout, config);
+    };
+
+    plotIt();
+</script>

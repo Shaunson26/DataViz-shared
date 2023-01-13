@@ -1,0 +1,77 @@
+<!-- 
+    Plot template
+    
+    Use this to draft your plot. Use data.js. Add required libraries in the script
+    tag
+
+-->
+<!-- SOURCE DATA - leave unchanged -->
+<script src="../data/data.js"></script>
+<link rel="stylesheet" href="../styles.css">
+
+<!-- PLOT -->
+
+<!-- required libray -->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- plot title -->
+<p>Google charts pie chart</p>
+
+<!-- plot div -->
+<div id="{plot-id}" class='plot123'></div>
+
+<!-- plot script -->
+<script>
+    /* Leave these two lines - matches first {plot-id} (above) to make id unique */
+    var uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+    document.getElementById('{plot-id}').id = uniqid;
+
+    function plotIt() {
+
+        /* Add plot code below */
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows(pizzaData.map(d => [d.ingredient, d.n]));
+
+            // Set chart options
+            var options = {
+                'title': 'What was my pizzas'
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById(uniqid));
+            chart.draw(data, options);
+
+        }
+        // Silly google resize code
+        let google_shite = "done";
+
+        function resizer() {
+            if (google_shite == "done") {
+                google_shite = "waiting";
+                setTimeout(function () {
+                    drawChart();
+                    google_shite = "done";
+                }, 1000);
+            }
+            document.querySelectorAll('div[style="position: absolute; display: none;"]').forEach(e => e.remove())
+        };
+
+        window.addEventListener('resize', resizer, false);
+    }
+
+    plotIt();
+</script>

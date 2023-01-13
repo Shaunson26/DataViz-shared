@@ -1,0 +1,61 @@
+<!-- 
+    Plot template
+    
+    Use this to draft your plot. Use data.js. Add required libraries in the script
+    tag
+
+-->
+<!-- SOURCE DATA - leave unchanged -->
+<script src="../data/data.js"></script>
+<link rel="stylesheet" href="../styles.css">
+
+<!-- PLOT -->
+
+<!-- required libray - keep 1 liners for now-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.1.2/chart.umd.js"></script>
+
+<!-- plot title -->
+<p>chartjs scatterplot</p>
+
+<!-- plot div -->
+<div class='plot123'>
+    <canvas id="{plot-id}"></canvas>
+</div>
+
+<!-- plot script -->
+<script>
+    function plotIt() {
+        /* Leave these two lines - matches first {plot-id} (above) to make id unique */
+        var uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+        document.getElementById('{plot-id}').id = uniqid;
+
+        let scatterDataXY = scatterData.x.map((d, i) => { return { x: scatterData.x[i], y: scatterData.y[i] } });
+
+        /* Add plot code below */
+        let data = {
+            datasets: [{
+                label: 'Scatter Dataset',
+                data: scatterDataXY,
+                backgroundColor: 'rgb(255, 99, 132)'
+            }]
+        };
+
+        let config = {
+            type: 'scatter',
+            data: data,
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom'
+                    }
+                },
+                maintainAspectRatio: false,
+                resizeDelay: 250
+            }
+        };
+
+        new Chart(document.getElementById(uniqid), config);
+    };
+    plotIt();
+</script>

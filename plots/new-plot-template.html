@@ -1,0 +1,30 @@
+<!-- 
+    Plot template
+    
+    Use this to draft your plot. Use data.js. Add required libraries in the script
+    tag
+
+-->
+<!-- SOURCE DATA - leave unchanged -->
+<script src="../data/data.js"></script>
+<link rel="stylesheet" href="../styles.css">
+
+<!-- PLOT -->
+
+<!-- required libray -->
+<script src="SOME CDN LINK"></script>
+
+<!-- plot title -->
+<p>INSERT TITLE HERE</p>
+
+<!-- plot div -->
+<div id="{plot-id}" class = 'plot123'></div>
+
+<!-- plot script -->
+<script>
+    /* Leave these two lines - matches first {plot-id} (above) to make id unique */
+    var uniqid = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + Date.now();
+    document.getElementById('{plot-id}').id = uniqid;
+    
+    /* Add plot code below */
+</script>
